@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Muhammad Kashif — Full-Stack MERN Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#07090d;--surface:#0c1018;--card:#101820;--card2:#0f1a27;
+  --border:#1a2535;--border2:#253347;
+  --accent:#3dffa0;--accent2:#7b6cf6;--accent3:#ff6b4a;
+  --ai:#a78bfa;--ai-bg:rgba(167,139,250,.07);--ai-border:rgba(167,139,250,.25);
+  --text:#dde6f0;--muted:#6e8099;--faint:#3a4f65;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+nav{position:sticky;top:0;z-index:200;background:rgba(7,9,13,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:52px}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;letter-spacing:-1px}
+.logo em{color:var(--accent);font-style:normal}
+.nav-links{display:flex;gap:2rem;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{font-size:12px;font-weight:700;padding:7px 16px;background:var(--accent);color:#07090d;border-radius:7px;font-family:'Syne',sans-serif}
+.nav-cta:hover{opacity:.88}
+
+.hero{padding:3rem 2rem 2.5rem;max-width:960px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(61,255,160,.07);border:1px solid rgba(61,255,160,.2);border-radius:100px;padding:4px 14px;font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:1.5rem}
+.badge-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1.hero-name{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(40px,7vw,72px);line-height:.95;letter-spacing:-2.5px;margin-bottom:1rem}
+h1.hero-name .hl{color:var(--accent)}
+.hero-role{font-size:16px;color:var(--muted);font-weight:300;margin-bottom:.75rem}
+.hero-role strong{color:var(--text);font-weight:500}
+.hero-bio{max-width:600px;color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:1.75rem}
+.hero-bio strong{color:var(--text);font-weight:500}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2rem}
+.btn-main{padding:11px 22px;background:var(--accent);color:#07090d;font-weight:700;font-size:13px;border-radius:8px;font-family:'Syne',sans-serif}
+.btn-main:hover{opacity:.9}
+.btn-out{padding:11px 22px;border:1px solid var(--border2);color:var(--text);font-size:13px;border-radius:8px;font-family:'DM Mono',monospace}
+.btn-out:hover{border-color:var(--accent);color:var(--accent)}
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.stat-cell{padding:1.25rem;background:var(--card);border-right:1px solid var(--border)}
+.stat-cell:last-child{border-right:none}
+.stat-n{font-family:'Syne',sans-serif;font-weight:800;font-size:30px;line-height:1;letter-spacing:-1.5px}
+.stat-n em{color:var(--accent);font-style:normal}
+.stat-lbl{font-size:10px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace;letter-spacing:1px}
+
+.wrap{max-width:960px;margin:0 auto;padding:2.5rem 2rem}
+.sec-eyebrow{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:3px;margin-bottom:.4rem}
+.sec-eyebrow.ai-eye{color:var(--ai)}
+.sec-title{font-family:'Syne',sans-serif;font-weight:800;font-size:26px;letter-spacing:-.8px;margin-bottom:.5rem}
+.sec-sub{color:var(--muted);max-width:520px;font-size:13.5px;line-height:1.7;margin-bottom:2rem}
+.divider{border:none;border-top:1px solid var(--border)}
+
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:2rem;align-items:start}
+.about-text p{color:var(--muted);font-size:13.5px;line-height:1.85;margin-bottom:.9rem}
+.about-text p:last-child{margin-bottom:0}
+.about-text p strong{color:var(--text);font-weight:500}
+.about-cards{display:flex;flex-direction:column;gap:8px}
+.about-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;display:flex;gap:10px;align-items:flex-start}
+.about-card-icon{font-size:15px;margin-top:1px;flex-shrink:0}
+.about-card-label{font-size:10px;font-family:'DM Mono',monospace;color:var(--muted);letter-spacing:1px;margin-bottom:2px}
+.about-card-val{font-size:13px;color:var(--text);font-weight:500}
+
+.skills-outer{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:2rem}
+.skill-pane{background:var(--card);padding:1.5rem}
+.skill-pane-title{font-family:'DM Mono',monospace;font-size:10px;color:var(--faint);letter-spacing:3px;margin-bottom:1rem}
+.chip-row{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);color:var(--muted);background:#0c1520}
+.chip.hi{border-color:rgba(61,255,160,.3);color:var(--accent);background:rgba(61,255,160,.05)}
+.chip.hi2{border-color:rgba(123,108,246,.3);color:#a89cf7;background:rgba(123,108,246,.05)}
+.chip.hi3{border-color:rgba(255,107,74,.25);color:#ff9a80;background:rgba(255,107,74,.05)}
+.chip.ai{border-color:var(--ai-border);color:var(--ai);background:var(--ai-bg)}
+.prof-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2.5rem}
+.prof-header{display:flex;justify-content:space-between;margin-bottom:5px;font-size:12px}
+.prof-name{color:var(--text)}
+.prof-pct{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)}
+.prof-track{height:2px;background:var(--border);border-radius:2px;overflow:hidden}
+.prof-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent2),var(--accent))}
+
+.exp-timeline{position:relative;padding-left:1.75rem}
+.exp-timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:var(--border)}
+.exp-item{position:relative;margin-bottom:2rem}
+.exp-item:last-child{margin-bottom:0}
+.exp-dot{position:absolute;left:-2.19rem;top:7px;width:9px;height:9px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+.exp-meta{display:flex;align-items:center;gap:8px;margin-bottom:.4rem;flex-wrap:wrap}
+.exp-period{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:2px 9px;border-radius:4px}
+.exp-status{font-size:10px;padding:2px 9px;border-radius:4px;font-family:'DM Mono',monospace;background:rgba(61,255,160,.1);border:1px solid rgba(61,255,160,.2);color:var(--accent)}
+.exp-company{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.4px;margin-bottom:2px}
+.exp-role{font-size:12px;color:var(--accent2);font-weight:500;margin-bottom:.75rem;font-family:'DM Mono',monospace}
+.exp-body{color:var(--muted);font-size:13.5px;line-height:1.8;margin-bottom:1rem}
+.exp-body strong{color:var(--text);font-weight:500}
+.exp-wins{display:flex;flex-wrap:wrap;gap:7px}
+.win-tag{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:12px;color:var(--text)}
+.win-tag strong{color:var(--accent);font-weight:600}
+
+.ai-hero{background:var(--ai-bg);border:1px solid var(--ai-border);border-radius:16px;padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.ai-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.12),transparent 70%);pointer-events:none}
+.ai-hero-top{display:flex;align-items:flex-start;gap:1.25rem;margin-bottom:1.25rem}
+.ai-badge-big{width:52px;height:52px;border-radius:12px;background:rgba(167,139,250,.15);border:1px solid var(--ai-border);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.ai-hero-title{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.4px;color:var(--text);margin-bottom:4px}
+.ai-hero-sub{font-size:13px;color:var(--muted);line-height:1.7}
+.ai-hero-sub strong{color:var(--ai);font-weight:500}
+.ai-tools-row{display:flex;flex-wrap:wrap;gap:7px}
+.ai-tool{display:flex;align-items:center;gap:6px;background:rgba(167,139,250,.08);border:1px solid var(--ai-border);border-radius:7px;padding:5px 12px;font-family:'DM Mono',monospace;font-size:11px;color:var(--ai)}
+.ai-tool-dot{width:5px;height:5px;border-radius:50%;background:var(--ai);opacity:.7}
+
+.ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:1.5rem}
+.ai-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;position:relative;overflow:hidden}
+.ai-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ai),transparent);opacity:.4}
+.ai-card-icon{font-size:22px;margin-bottom:.75rem}
+.ai-card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--text);margin-bottom:.4rem}
+.ai-card-desc{font-size:12.5px;color:var(--muted);line-height:1.7}
+.ai-card-desc strong{color:var(--ai);font-weight:500}
+
+.ai-impact{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.ai-impact-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--text);margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.ai-impact-title span{font-size:16px}
+.ai-impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:8px;overflow:hidden}
+.ai-impact-cell{background:var(--card2);padding:1rem;text-align:center}
+.ai-impact-num{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;letter-spacing:-1px;color:var(--ai)}
+.ai-impact-label{font-size:11px;color:var(--muted);margin-top:3px;font-family:'DM Mono',monospace;line-height:1.4}
+
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;transition:border-color .2s}
+.pcard:hover{border-color:var(--border2)}
+.pcard.span2{grid-column:1/-1;flex-direction:row;gap:2rem}
+.pcard-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ico-g{background:#0a2018}.ico-p{background:#16102e}.ico-o{background:#25100a}
+.ico-b{background:#091c30}.ico-t{background:#071f1c}.ico-pk{background:#220d18}
+.ico-gr{background:#161b22}
+.pcard-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.2px}
+.pcard-link{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);opacity:.8;margin-top:-4px;display:inline-block}
+.pcard-link:hover{opacity:1}
+.pcard-desc{font-size:13px;color:var(--muted);line-height:1.75;flex:1}
+.pcard-highlights{display:flex;flex-direction:column;gap:5px}
+.pcard-hl{font-size:12.5px;color:var(--muted);display:flex;gap:7px;align-items:flex-start}
+.pcard-hl::before{content:'✦';color:var(--accent);font-size:8px;margin-top:4px;flex-shrink:0}
+.pcard-stack{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+.stag{font-family:'DM Mono',monospace;font-size:10px;color:var(--faint);background:#0c1520;border:1px solid var(--border);padding:2px 8px;border-radius:4px}
+.pcard-body{display:flex;flex-direction:column;gap:.6rem;flex:1}
+.ai-used-tag{display:inline-flex;align-items:center;gap:5px;background:var(--ai-bg);border:1px solid var(--ai-border);border-radius:5px;padding:2px 8px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ai)}
+
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.val-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
+.val-icon{font-size:22px;margin-bottom:.75rem}
+.val-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:.4rem}
+.val-desc{font-size:13px;color:var(--muted);line-height:1.7}
+
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;display:flex;gap:1.25rem;align-items:flex-start}
+.edu-icon{width:46px;height:46px;background:#101f30;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.edu-deg{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;letter-spacing:-.3px;margin-bottom:3px}
+.edu-inst{font-size:13px;color:var(--accent2)}
+.edu-period{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px}
+.edu-desc{font-size:13px;color:var(--muted);line-height:1.75;margin-top:.6rem}
+
+.contact-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:3rem 2rem;text-align:center}
+.contact-big{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(24px,4.5vw,44px);letter-spacing:-1.5px;line-height:1.05;margin-bottom:1rem}
+.contact-big span{color:var(--accent)}
+.contact-tagline{color:var(--muted);max-width:460px;margin:0 auto 2rem;font-size:14px;line-height:1.8}
+.contact-pills{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:1.25rem}
+.cpill{display:flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid var(--border2);border-radius:8px;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);transition:all .2s}
+.cpill:hover{border-color:var(--accent);color:var(--accent)}
+.contact-note{font-size:11px;color:var(--faint);font-family:'DM Mono',monospace}
+
+footer{border-top:1px solid var(--border);padding:1.75rem 2rem;text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--faint);letter-spacing:.5px}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">MK<em>.</em></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#ai">AI</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a class="nav-cta" href="mailto:muhammad.kashif72462@gmail.com">Hire me &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span class="badge-dot"></span>Open to opportunities</div>
+  <h1 class="hero-name">Muhammad<br><span class="hl">Kashif.</span></h1>
+  <p class="hero-role">Full-Stack <strong>MERN Developer</strong> &middot; AI-Augmented Engineer &middot; Lahore, Pakistan</p>
+  <p class="hero-bio">I build <strong>scalable, production-ready web applications</strong> with React.js, Next.js, Node.js &amp; Nest.js &mdash; and I leverage <strong>AI tools daily</strong> to ship faster, write better code, and solve harder problems. 4 years of professional experience across healthcare, e-commerce, real-time platforms, and developer tooling.</p>
+  <div class="hero-actions">
+    <a class="btn-main" href="mailto:muhammad.kashif72462@gmail.com">Get in touch</a>
+    <a class="btn-out" href="https://github.com/kashif281" target="_blank">GitHub &nearr;</a>
+    <a class="btn-out" href="https://linkedin.com/in/MuhammadKashif" target="_blank">LinkedIn &nearr;</a>
+  </div>
+  <div class="stats-strip">
+    <div class="stat-cell"><div class="stat-n">4<em>+</em></div><div class="stat-lbl">YRS EXPERIENCE</div></div>
+    <div class="stat-cell"><div class="stat-n">10<em>+</em></div><div class="stat-lbl">PROJECTS SHIPPED</div></div>
+    <div class="stat-cell"><div class="stat-n">50<em>%</em></div><div class="stat-lbl">API SPEED GAIN</div></div>
+    <div class="stat-cell"><div class="stat-n">2<em>x</em></div><div class="stat-lbl">OUTPUT WITH AI</div></div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<div class="wrap" id="about">
+  <div class="sec-eyebrow">WHO I AM</div>
+  <div class="sec-title">About me</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I&rsquo;m a full-stack developer based in <strong>Lahore, Pakistan</strong>, specialising in the MERN stack and its modern derivatives &mdash; Next.js, Nest.js, TypeScript, and PostgreSQL. Since 2021 I&rsquo;ve been writing production code across startups and agencies, working with both local and overseas engineering teams.</p>
+      <p>My approach is practical: I care about <strong>code quality, API design, and real-world performance</strong>. Whether it&rsquo;s reducing response times by 50% through indexing, wiring up Stripe payments, or architecting a real-time notification system &mdash; I focus on outcomes that matter to the business.</p>
+      <p>What sets me apart is how I work: I&rsquo;m a <strong>fluent, daily user of AI development tools</strong> &mdash; from code generation and debugging to architecture review and documentation. This lets me move significantly faster without sacrificing quality, and tackle complexity that would otherwise take much longer.</p>
+      <p>When I&rsquo;m not shipping features, I&rsquo;m pushing the edge &mdash; most recently building <strong>Ownify</strong>, an AI-powered backend generator that deploys directly to AWS from a single natural-language prompt.</p>
+    </div>
+    <div class="about-cards">
+      <div class="about-card"><div class="about-card-icon">&#128205;</div><div><div class="about-card-label">LOCATION</div><div class="about-card-val">Lahore, Punjab, Pakistan</div></div></div>
+      <div class="about-card"><div class="about-card-icon">&#127891;</div><div><div class="about-card-label">EDUCATION</div><div class="about-card-val">BSIT &mdash; University of Punjab (2016&ndash;2020)</div></div></div>
+      <div class="about-card"><div class="about-card-icon">&#128188;</div><div><div class="about-card-label">CURRENT ROLE</div><div class="about-card-val">Software Engineer @ Mavric</div></div></div>
+      <div class="about-card"><div class="about-card-icon">&#129302;</div><div><div class="about-card-label">AI PROFICIENCY</div><div class="about-card-val">Daily AI-augmented development</div></div></div>
+      <div class="about-card"><div class="about-card-icon">&#9993;&#65039;</div><div><div class="about-card-label">EMAIL</div><div class="about-card-val">muhammad.kashif72462@gmail.com</div></div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<div class="wrap" id="skills">
+  <div class="sec-eyebrow">TECH STACK</div>
+  <div class="sec-title">Skills &amp; technologies</div>
+  <div class="skills-outer">
+    <div class="skill-pane">
+      <div class="skill-pane-title">FRONTEND</div>
+      <div class="chip-row">
+        <span class="chip hi">React.js</span><span class="chip hi">Next.js</span><span class="chip hi">React Native</span><span class="chip hi">TypeScript</span><span class="chip hi2">Redux Toolkit</span><span class="chip hi2">React Query</span><span class="chip">Tailwind CSS</span><span class="chip">MUI</span><span class="chip">Bootstrap</span><span class="chip">Sass</span>
+      </div>
+    </div>
+    <div class="skill-pane">
+      <div class="skill-pane-title">BACKEND</div>
+      <div class="chip-row">
+        <span class="chip hi">Node.js</span><span class="chip hi">Nest.js</span><span class="chip hi">PostgreSQL</span><span class="chip hi2">MongoDB</span><span class="chip hi2">GraphQL</span><span class="chip">Express.js</span><span class="chip">TypeORM</span><span class="chip">REST APIs</span><span class="chip">Microservices</span><span class="chip">Redis</span>
+      </div>
+    </div>
+    <div class="skill-pane">
+      <div class="skill-pane-title">DEVOPS &amp; CLOUD</div>
+      <div class="chip-row">
+        <span class="chip hi">AWS EC2</span><span class="chip hi">AWS S3</span><span class="chip hi2">Docker</span><span class="chip hi2">CI/CD</span><span class="chip">Git</span><span class="chip">Jest</span><span class="chip">Jira</span>
+      </div>
+    </div>
+    <div class="skill-pane">
+      <div class="skill-pane-title">AI TOOLS</div>
+      <div class="chip-row">
+        <span class="chip ai">Claude (Anthropic)</span><span class="chip ai">ChatGPT</span><span class="chip ai">GitHub Copilot</span><span class="chip ai">Cursor</span><span class="chip ai">v0.dev</span><span class="chip ai">Prompt Engineering</span>
+      </div>
+    </div>
+  </div>
+  <div class="prof-grid">
+    <div><div class="prof-header"><span class="prof-name">React / Next.js</span><span class="prof-pct">95%</span></div><div class="prof-track"><div class="prof-fill" style="width:95%"></div></div></div>
+    <div><div class="prof-header"><span class="prof-name">Node.js / Nest.js</span><span class="prof-pct">90%</span></div><div class="prof-track"><div class="prof-fill" style="width:90%"></div></div></div>
+    <div><div class="prof-header"><span class="prof-name">TypeScript</span><span class="prof-pct">88%</span></div><div class="prof-track"><div class="prof-fill" style="width:88%"></div></div></div>
+    <div><div class="prof-header"><span class="prof-name">PostgreSQL / MongoDB</span><span class="prof-pct">85%</span></div><div class="prof-track"><div class="prof-fill" style="width:85%"></div></div></div>
+    <div><div class="prof-header"><span class="prof-name">AI-Assisted Development</span><span class="prof-pct">92%</span></div><div class="prof-track"><div class="prof-fill" style="width:92%;background:linear-gradient(90deg,var(--ai),#c4b5fd)"></div></div></div>
+    <div><div class="prof-header"><span class="prof-name">AWS / Docker / CI-CD</span><span class="prof-pct">75%</span></div><div class="prof-track"><div class="prof-fill" style="width:75%"></div></div></div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- EXPERIENCE -->
+<div class="wrap" id="experience">
+  <div class="sec-eyebrow">CAREER</div>
+  <div class="sec-title">Work experience</div>
+  <div class="exp-timeline">
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-meta"><span class="exp-period">AUG 2022 &ndash; PRESENT</span><span class="exp-status">&#9679; Current</span></div>
+      <div class="exp-company">Mavric</div>
+      <div class="exp-role">Software Engineer</div>
+      <p class="exp-body">Working in an agile team on a full-featured <strong>Project Management SaaS platform</strong> with an overseas engineering team. Owning both Next.js frontend and Nest.js backend modules &mdash; feature development, API design, third-party integrations, and production monitoring. AI tools used daily to accelerate delivery and code review.</p>
+      <div class="exp-wins">
+        <span class="win-tag">&#9889; Stripe: <strong>30% faster</strong> transactions</span>
+        <span class="win-tag">&#128276; Real-time notifications via <strong>Pusher</strong></span>
+        <span class="win-tag">&#127760; Overseas agile team</span>
+        <span class="win-tag">&#129302; AI-assisted daily workflow</span>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot" style="background:var(--accent2)"></div>
+      <div class="exp-meta"><span class="exp-period">JAN 2021 &ndash; AUG 2022</span></div>
+      <div class="exp-company">PikesSoft</div>
+      <div class="exp-role" style="color:#a89cf7">Associate Software Engineer</div>
+      <p class="exp-body">Grew quickly into full ownership of frontend and backend tasks. Built the company&rsquo;s reusable React component library and delivered major API performance improvements. Led SEO/performance work achieving a <strong>perfect Lighthouse score</strong> for a client platform.</p>
+      <div class="exp-wins">
+        <span class="win-tag">&#129513; React component library</span>
+        <span class="win-tag">&#128640; APIs: <strong>50% faster</strong></span>
+        <span class="win-tag">&#128161; Dev efficiency: <strong>+20%</strong></span>
+        <span class="win-tag">&#128269; Perfect Lighthouse score</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- AI SECTION -->
+<div class="wrap" id="ai">
+  <div class="sec-eyebrow ai-eye">AI-AUGMENTED DEVELOPMENT</div>
+  <div class="sec-title">I code with AI &mdash; every day.</div>
+  <p class="sec-sub">AI isn&rsquo;t a gimmick for me &mdash; it&rsquo;s a core part of how I work. I use it deliberately, critically, and constantly to ship better software, faster.</p>
+
+  <div class="ai-hero">
+    <div class="ai-hero-top">
+      <div class="ai-badge-big">&#129302;</div>
+      <div>
+        <div class="ai-hero-title">Fluent in AI-Assisted Engineering</div>
+        <p class="ai-hero-sub">I&rsquo;ve built my entire workflow around AI tooling &mdash; using <strong>Claude, ChatGPT, GitHub Copilot, and Cursor</strong> not just for autocomplete, but for architecture review, debugging complex issues, writing documentation, generating test suites, and prototyping entire features. The result: I consistently deliver <strong>senior-level output at significantly higher velocity</strong>.</p>
+      </div>
+    </div>
+    <div class="ai-tools-row">
+      <div class="ai-tool"><span class="ai-tool-dot"></span>Claude (Anthropic)</div>
+      <div class="ai-tool"><span class="ai-tool-dot"></span>ChatGPT / GPT-4</div>
+      <div class="ai-tool"><span class="ai-tool-dot"></span>GitHub Copilot</div>
+      <div class="ai-tool"><span class="ai-tool-dot"></span>Cursor IDE</div>
+      <div class="ai-tool"><span class="ai-tool-dot"></span>v0.dev</div>
+      <div class="ai-tool"><span class="ai-tool-dot"></span>Prompt Engineering</div>
+    </div>
+  </div>
+
+  <div class="ai-grid">
+    <div class="ai-card"><div class="ai-card-icon">&#9889;</div><div class="ai-card-title">2x Faster Feature Delivery</div><p class="ai-card-desc">AI handles boilerplate, repetitive patterns, and first drafts &mdash; I focus on architecture, logic, and edge cases. Features that used to take a week ship in days. <strong>More output, same team size.</strong></p></div>
+    <div class="ai-card"><div class="ai-card-icon">&#128027;</div><div class="ai-card-title">Smarter, Faster Debugging</div><p class="ai-card-desc">I feed complex bug traces and stack dumps to AI for rapid root cause analysis &mdash; then verify and fix with my own understanding. <strong>Hours of debugging compressed to minutes.</strong></p></div>
+    <div class="ai-card"><div class="ai-card-icon">&#127959;&#65039;</div><div class="ai-card-title">Architecture as a Dialogue</div><p class="ai-card-desc">Before committing to a design, I use AI to stress-test my thinking &mdash; catching pitfalls, exploring tradeoffs, and validating approaches. <strong>Better decisions, earlier.</strong></p></div>
+    <div class="ai-card"><div class="ai-card-icon">&#9989;</div><div class="ai-card-title">AI-Generated Test Coverage</div><p class="ai-card-desc">Test suites, edge case generation, and mock data &mdash; AI drafts them and I refine. <strong>Higher coverage without the time cost</strong> of writing every test by hand.</p></div>
+    <div class="ai-card"><div class="ai-card-icon">&#128221;</div><div class="ai-card-title">Living Documentation</div><p class="ai-card-desc">API docs, README files, inline comments &mdash; AI keeps documentation current and consistent. Teams I work with get <strong>codebases that are actually documented.</strong></p></div>
+    <div class="ai-card"><div class="ai-card-icon">&#128269;</div><div class="ai-card-title">Code Review Partner</div><p class="ai-card-desc">I run my own PRs through AI before pushing &mdash; catching potential issues, naming inconsistencies, and security concerns. <strong>Cleaner code reaches reviewers.</strong></p></div>
+  </div>
+
+  <div class="ai-impact">
+    <div class="ai-impact-title"><span>&#128202;</span> What AI expertise brings to your team</div>
+    <div class="ai-impact-grid">
+      <div class="ai-impact-cell"><div class="ai-impact-num">2x</div><div class="ai-impact-label">Feature delivery speed</div></div>
+      <div class="ai-impact-cell"><div class="ai-impact-num">~70%</div><div class="ai-impact-label">Less time on boilerplate</div></div>
+      <div class="ai-impact-cell"><div class="ai-impact-num">&uarr;40%</div><div class="ai-impact-label">Test coverage achieved</div></div>
+      <div class="ai-impact-cell"><div class="ai-impact-num">&darr;60%</div><div class="ai-impact-label">Debug time per issue</div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<div class="wrap" id="projects">
+  <div class="sec-eyebrow">PORTFOLIO</div>
+  <div class="sec-title">Projects I&rsquo;ve built</div>
+  <div class="proj-grid">
+
+    <div class="pcard span2">
+      <div class="pcard-icon ico-g">&#127973;</div>
+      <div class="pcard-body">
+        <div><div class="pcard-title">Almana Hospitals &mdash; Tenant &amp; Entity Management</div></div>
+        <p class="pcard-desc">Internal management platform for a multi-tenant hospital network in Saudi Arabia. React Admin dashboard backed by a Nest.js API and PostgreSQL for complex healthcare data &mdash; tenant onboarding, entity configuration, and role-based access control.</p>
+        <div class="pcard-highlights">
+          <div class="pcard-hl">Multi-tenant data models with TypeORM, supporting isolated environments per hospital entity.</div>
+          <div class="pcard-hl">Customised React Admin dashboard with role-based views, filtering, and admin controls.</div>
+        </div>
+        <div class="pcard-stack"><span class="stag">React.js</span><span class="stag">React Admin</span><span class="stag">Nest.js</span><span class="stag">PostgreSQL</span><span class="stag">TypeORM</span><span class="stag">TypeScript</span></div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pcard-icon ico-p">&#127999;</div>
+      <div class="pcard-body">
+        <div><div class="pcard-title">BrokerHub.store</div><a class="pcard-link" href="https://brokerhub.store" target="_blank">brokerhub.store &nearr;</a></div>
+        <p class="pcard-desc">Premium ticket &amp; digital products marketplace. Stripe checkout, dynamic pricing, subscriptions, referral system, bulk quote flow. 10k+ deliveries, 99.9% uptime.</p>
+        <div class="pcard-highlights">
+          <div class="pcard-hl">Stripe payment integration with dynamic pricing and subscription management.</div>
+          <div class="pcard-hl">Referral and bulk-quote systems driving repeat business.</div>
+        </div>
+        <div class="pcard-stack"><span class="stag">Next.js</span><span class="stag">Node.js</span><span class="stag">Stripe</span><span class="stag">PostgreSQL</span></div>
+        <span class="ai-used-tag">&#129302; AI-assisted</span>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pcard-icon ico-t">&#127183;</div>
+      <div class="pcard-body">
+        <div><div class="pcard-title">OnTheFelt.app</div><a class="pcard-link" href="https://onthefelt.app" target="_blank">onthefelt.app &nearr;</a></div>
+        <p class="pcard-desc">Real-time poker platform built for low-latency gameplay. Live game state sync, lobby management, matchmaking, and sessions via WebSockets &mdash; every player always in sync.</p>
+        <div class="pcard-highlights">
+          <div class="pcard-hl">Real-time game state sync across all players using WebSockets.</div>
+          <div class="pcard-hl">Lobby, matchmaking and session management on Node.js backend.</div>
+        </div>
+        <div class="pcard-stack"><span class="stag">React.js</span><span class="stag">Node.js</span><span class="stag">WebSockets</span><span class="stag">PostgreSQL</span></div>
+        <span class="ai-used-tag">&#129302; AI-assisted</span>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pcard-icon ico-pk">&#128154;</div>
+      <div class="pcard-body">
+        <div><div class="pcard-title">OurWellnessApp</div><a class="pcard-link" href="https://ourwellnessapp.com" target="_blank">ourwellnessapp.com &nearr;</a></div>
+        <p class="pcard-desc">Holistic wellness platform connecting practitioners with clients. Appointment scheduling, health tracking, coach&ndash;client communication &mdash; mobile-first on React Native.</p>
+        <div class="pcard-highlights">
+          <div class="pcard-hl">Mobile-first React Native app for iOS and Android.</div>
+          <div class="pcard-hl">Practitioner and client portals with progress tracking.</div>
+        </div>
+        <div class="pcard-stack"><span class="stag">React Native</span><span class="stag">Next.js</span><span class="stag">Nest.js</span><span class="stag">PostgreSQL</span></div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pcard-icon ico-b">&#127902;</div>
+      <div class="pcard-body">
+        <div><div class="pcard-title">KEYKI</div></div>
+        <p class="pcard-desc">Video-based e-commerce app &mdash; discover and buy through immersive video. Real-time Pusher notifications, Stripe payments, TypeScript-first Next.js + Nest.js monorepo.</p>
+        <div class="pcard-highlights">
+          <div class="pcard-hl">Pusher-powered real-time order and event notifications.</div>
+          <div class="pcard-hl">Stripe payments with TypeORM transactional integrity.</div>
+        </div>
+        <div class="pcard-stack"><span class="stag">Next.js</span><span class="stag">Nest.js</span><span class="stag">TypeScript</span><span class="stag">Pusher</span><span class="stag">Stripe</span></div>
+      </div>
+    </div>
+
+    <div class="pcard">
+      <div class="pcard-icon ico-o">&#128226;</div>
+      <div class="pcard-body">
+        <div><div class="pcard-title">FrequencyAds</div></div>
+        <p class="pcard-desc">Ad management platform for publishers and advertisers. Dual frontend architecture &mdash; React + Angular &mdash; sharing one Node.js backend for unified campaign delivery and reporting.</p>
+        <div class="pcard-highlights">
+          <div class="pcard-hl">Dual frontend consumers (React + Angular) on one backend.</div>
+          <div class="pcard-hl">Campaign targeting, delivery optimisation, and dashboards.</div>
+        </div>
+        <div class="pcard-stack"><span class="stag">React.js</span><span class="stag">Angular</span><span class="stag">Node.js</span><span class="stag">PostgreSQL</span></div>
+      </div>
+    </div>
+
+    <div class="pcard span2">
+      <div class="pcard-icon ico-gr">&#9729;&#65039;</div>
+      <div class="pcard-body">
+        <div>
+          <div class="pcard-title">Ownify &mdash; AI-Powered Backend Generator</div>
+          <span style="display:inline-flex;align-items:center;gap:5px;background:var(--ai-bg);border:1px solid var(--ai-border);border-radius:5px;padding:2px 9px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ai);margin-top:4px">&#129302; AI-core product</span>
+        </div>
+        <p class="pcard-desc">Describe your app in a natural language prompt &mdash; get a complete, production-ready backend generated and deployed directly to your AWS account or GitHub repo, with live logs, database setup, and monitoring. The most AI-native project in my portfolio, built on deep understanding of LLM capabilities and limitations.</p>
+        <div class="pcard-highlights">
+          <div class="pcard-hl">Prompt-to-backend pipeline: natural language &rarr; production-ready code, instantly.</div>
+          <div class="pcard-hl">Automated AWS (EC2 + S3) deployment with live log streaming back to the UI.</div>
+          <div class="pcard-hl">One-click GitHub integration to push generated code directly to user repos.</div>
+        </div>
+        <div class="pcard-stack"><span class="stag">Next.js</span><span class="stag">SSR</span><span class="stag">Node.js</span><span class="stag">AWS EC2</span><span class="stag">AWS S3</span><span class="stag">PostgreSQL</span><span class="stag">LLM APIs</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- VALUE -->
+<div class="wrap">
+  <div class="sec-eyebrow">VALUE</div>
+  <div class="sec-title">What I bring to a team</div>
+  <div class="value-grid">
+    <div class="val-card"><div class="val-icon">&#9889;</div><div class="val-title">Performance-first</div><p class="val-desc">I measure before I optimise. From 50% API speed gains to perfect Lighthouse scores &mdash; performance is a feature, not an afterthought.</p></div>
+    <div class="val-card"><div class="val-icon">&#129513;</div><div class="val-title">Full-stack ownership</div><p class="val-desc">Equally comfortable designing a DB schema, writing a Nest.js service, and building the React component consuming it. No hand-offs needed.</p></div>
+    <div class="val-card"><div class="val-icon">&#129302;</div><div class="val-title">AI-multiplied output</div><p class="val-desc">I use AI tools daily and strategically &mdash; delivering the throughput of a larger team without the overhead. Faster shipping, higher coverage, cleaner code.</p></div>
+    <div class="val-card"><div class="val-icon">&#129309;</div><div class="val-title">Async-ready</div><p class="val-desc">Experienced with overseas and distributed agile teams. Clear communication, documented code, and consistent delivery without constant sync.</p></div>
+    <div class="val-card"><div class="val-icon">&#128179;</div><div class="val-title">Payments expert</div><p class="val-desc">Deep Stripe and PayPal experience &mdash; webhooks, subscriptions, dispute handling, and full transaction lifecycle management in production.</p></div>
+    <div class="val-card"><div class="val-icon">&#127959;&#65039;</div><div class="val-title">Clean code</div><p class="val-desc">TypeScript throughout. Component libraries devs want to use. API contracts that make sense. Code the next engineer won&rsquo;t have to rewrite.</p></div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- EDUCATION -->
+<div class="wrap">
+  <div class="sec-eyebrow">BACKGROUND</div>
+  <div class="sec-title">Education</div>
+  <div class="edu-card">
+    <div class="edu-icon">&#127891;</div>
+    <div>
+      <div class="edu-deg">Bachelor of Science in Information Technology</div>
+      <div class="edu-inst">University of Punjab, Pakistan</div>
+      <div class="edu-period">2016 &ndash; 2020</div>
+      <p class="edu-desc">Four-year degree covering software engineering fundamentals, data structures, algorithms, database design, networking, and project management &mdash; the technical foundation underpinning every production system I&rsquo;ve shipped since.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- CONTACT -->
+<div class="wrap" id="contact">
+  <div class="contact-wrap">
+    <div class="contact-big">Ready to build<br><span>something great?</span></div>
+    <p class="contact-tagline">Whether you need a full-stack engineer, a freelance developer to ship fast, or want to explore a project idea &mdash; I&rsquo;d love to hear from you. I respond quickly.</p>
+    <div class="contact-pills">
+      <a class="cpill" href="mailto:muhammad.kashif72462@gmail.com">&#9993; muhammad.kashif72462@gmail.com</a>
+      <a class="cpill" href="tel:+923016294462">&#128222; +92-301-6294462</a>
+      <a class="cpill" href="https://github.com/kashif281" target="_blank">&#8997; github.com/kashif281</a>
+      <a class="cpill" href="https://linkedin.com/in/MuhammadKashif" target="_blank">in LinkedIn</a>
+    </div>
+    <p class="contact-note">Based in Lahore &middot; Available for remote &amp; on-site roles</p>
+  </div>
+</div>
+
+<footer>
+  Muhammad Kashif &middot; Full-Stack MERN Developer &middot; Lahore, Pakistan &nbsp;&middot;&nbsp;
+  <a href="https://github.com/kashif281">GitHub</a> &nbsp;&middot;&nbsp;
+  <a href="https://linkedin.com/in/MuhammadKashif">LinkedIn</a> &nbsp;&middot;&nbsp;
+  <a href="mailto:muhammad.kashif72462@gmail.com">Email</a>
+</footer>
+
+</body>
+</html>
